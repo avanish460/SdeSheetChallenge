@@ -1,0 +1,33 @@
+Pascal's Triangle(Easy)
+
+class Solution{
+      public List<List<Integer>> generate(int numRows){
+
+        List<List<Integer>> pascalTriange = new ArrayList<List<Integer>>();
+        ArrayList<Integer> currRow, prevRow = null;
+        
+        for(int i=0; i<numRows; i++){
+            currRow = new ArrayList<Integer>();
+              for(int int j=0; j<=i; j++){
+             //checking whether the column is 1 or the last then print 1 
+                   if(j == 0 || j == i){
+                       currRow.add(1);
+                     }
+                     // else add the jth and the j-1th index to the row. 
+                     else{
+
+                        currRow.add(prevRow.get(j) + prevRow.get(j-1));
+                      }
+
+                    }
+
+             prevRow = currRow;
+             pascalTriangle.add(currRow);
+          }    
+       return pascalTriangle;
+         
+   }
+
+}
+
+
