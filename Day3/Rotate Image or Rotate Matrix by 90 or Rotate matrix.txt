@@ -1,0 +1,91 @@
+Que: Rotate Matrix by 90*(medium)/Rotate Image
+
+Solution: 
+
+class Solution {
+    public void rotate(int[][] matrix) {
+        
+        //if the length of the matrix has only one element then just return
+        if(matrix.length == 1){
+            return;
+        }
+        
+        //Calculating the Transpose of the Matrix
+        for(int i=0; i<matrix.length; i++){
+            for(int j=i; j<matrix[0].length; j++){
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+        
+        
+        //Filiping the matrix according to column like col[0]->col[matrix[0].length]
+        for(int i=0; i<matrix.length; i++){
+            for(int j=0; j<matrix[0].length/2; j++){
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[i][matrix[0].length-1-j];
+                matrix[i][matrix[0].length-1-j] = temp;
+            }
+        }
+    }
+}
+
+***************************************************************************************************
+
+Que: Rotate Matrix(Medium)
+
+Solution:
+
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+
+public class Solution {
+    public static void rotateMatrix(ArrayList<ArrayList<Integer>> mat, int n, int m) {
+        // Write your code here.
+        int row = 0, col = 0, currEle, prevEle;
+        n = n-1; m = m-1;
+        while(row<n && col<m){
+            
+            prevEle = mat.get(row+1).get(col);
+            //first row
+            for(int i=col; i<=m; i++){
+                currEle = mat.get(row).get(i);
+                mat.get(row).set(i,prevEle);
+                prevEle = currEle;
+            }
+            row++;
+            
+            //last column
+            for(int i=row; i<=n; i++){
+                currEle = mat.get(i).get(m);
+                mat.get(i).set(m,prevEle);
+                prevEle = currEle;
+            }
+            m--;
+            //last row
+            if(row<=n){
+                for(int i=m; i>=col; i--){
+                    currEle = mat.get(n).get(i);
+                    mat.get(n).set(i,prevEle);
+                    prevEle = currEle;
+                }
+            }
+            n--;
+            //first column
+            if(col<=m){
+                for(int i=n; i>=row; i--){
+                    currEle = mat.get(i).get(col);
+                    mat.get(i).set(col,prevEle);
+                    prevEle = currEle;
+                }
+            }
+            col++;
+        }
+        
+    }
+}
+
+
+
