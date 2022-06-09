@@ -1,0 +1,41 @@
+Repeat and Missing Number
+
+import java.util.ArrayList;
+
+public class Solution {
+
+    public static int[] missingAndRepeating(ArrayList<Integer> arr, int n) {
+        // Write your code here
+       int[] ans = new int[2];
+        int[] copy_arr = new int[n];
+        for(int i=0; i<n; i++){
+            copy_arr[i] = i+1;
+        }
+        int duplicate = 0;
+        int missing = 0;
+        for(int i=0; i<n; i++){
+            for(int j=i+1; j<n; j++){
+                if(arr.get(i) == arr.get(j)){
+                    duplicate = arr.get(i);
+                    i++;
+                    break;
+                }
+            }
+            for(int j=0; j<n; j++){
+                if(copy_arr[j] == arr.get(i)){
+                    copy_arr[j] = 0;
+                }
+            }
+        }
+        
+        for(int i=0; i<n; i++){
+            if(copy_arr[i] != 0){
+                missing = copy_arr[i];
+                break;
+            }
+        }
+         ans[0] = missing;
+         ans[1] = duplicate;
+        return ans;
+    }
+}
