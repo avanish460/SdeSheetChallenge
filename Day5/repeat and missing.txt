@@ -1,4 +1,7 @@
-Repeat and Missing Number
+Que: Repeat and Missing Number
+
+Solution:
+Approach: Brute Force O(n^2):
 
 import java.util.ArrayList;
 
@@ -37,5 +40,42 @@ public class Solution {
          ans[0] = missing;
          ans[1] = duplicate;
         return ans;
+    }
+}
+
+/******************************************************************************************************************************************************************/
+
+Optimize Approach: O(n) but space complexity: O(n)
+
+import java.util.*;
+
+public class Solution {
+
+    public static int[] missingAndRepeating(ArrayList<Integer> arr, int n) {
+        // Write your code here
+        
+        int[] missRep = new int[2];
+        int A=0, B =0;
+        //count short
+        //Creating Substitute Array of size n+1
+        int[] sub = new int[n+1];
+        //Traversing throw the array and take their value as an index for the sub array and increment it by 1;
+        for(int i=0; i<n; i++){
+            sub[arr.get(i)]++;
+        }
+        //Traversing through the array and find where the no of count 0->missing element or 2->Duplicate element
+        for(int i=0; i<sub.length; i++){
+            if(sub[i] == 0){
+                A = i;
+            }
+            if(sub[i] == 2){
+                B = i;
+            }
+        }
+        
+        missRep[0] = A;
+        missRep[1] = B;
+        
+        return missRep;
     }
 }
