@@ -1,0 +1,61 @@
+Que: Modular Exponentiation(Easy) / Pow(x,n)(Medium)
+
+lInk:-
+
+1:https://bit.ly/3HkWTwT    
+2:https://leetcode.com/problems/powx-n/
+
+Solution:
+
+Coding Ninja: 
+
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static int modularExponentiation(int x, int n, int m) {
+        // Write your code here.  
+        long X = x;
+        long ans = 1;
+  
+        while(n>0){
+            if(n%2 == 1){
+
+       //when number is multiplied by larger number than it will cross
+      //the range of long so will reduce it by dividing m and it will not effect
+     //the result.
+
+                ans =(ans * X%m)%m;
+                n = n - 1;
+            }else{
+                X = (X%m * X%m)%m;
+                n = n / 2;
+            }
+        }
+     
+        ans = ans % m;
+        return (int)ans;
+      }
+}
+
+**************************************************************************
+Leetcode:
+
+class Solution {
+    public double myPow(double x, int n) {
+        
+    double ans = 1.0;
+    long ln = n;
+    if (ln < 0) ln = -1 * ln;
+    while (ln > 0) {
+      if (ln % 2 == 1) {
+        ans = ans * x;
+        ln = ln - 1;
+      } else {
+        x = x * x;
+        ln = ln / 2;
+      }
+    }
+    if (n < 0) ans = (double)(1.0) / (double)(ans);
+    return ans;
+    }
+}
