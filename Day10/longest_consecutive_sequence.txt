@@ -1,0 +1,36 @@
+Que: Longest Consecutive Sequence(Medium)
+
+Link: https://leetcode.com/problems/longest-consecutive-sequence/
+
+Solution:
+
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        
+        Set<Integer> hashSet = new HashSet<>();
+        
+        for(int ele: nums){
+            hashSet.add(ele);
+        }
+        
+        int lonConSeq = 0;
+        int initialNum = 0;
+        int conseLen = 0;
+        
+        for(int ele:nums){
+            if(!hashSet.contains(ele-1)){
+                initialNum = ele;
+                conseLen = 1;
+                
+                while(hashSet.contains(initialNum+1)){
+                    initialNum += 1;
+                    conseLen += 1;
+                }
+                
+                lonConSeq = Math.max(lonConSeq, conseLen);
+            }
+        }
+        
+        return lonConSeq;
+    }
+}
