@@ -1,0 +1,42 @@
+Que: Minimum Platforms(Medium)
+
+Link: https://practice.geeksforgeeks.org/problems/minimum-platforms-1587115620/1#
+
+Solution:
+
+class Solution
+{
+    //Function to find the minimum number of platforms required at the
+    //railway station such that no train waits.
+    static int findPlatform(int arr[], int dep[], int n)
+    {
+        // add your code here
+        Arrays.sort(arr);
+        Arrays.sort(dep);
+        int i=1, j=0, result = 1, no_of_platform = 1;
+        while(i<n && j<n){
+            
+            //checking whether the platform is empty or occupied 
+            if(arr[i] <= dep[j]){
+                no_of_platform++;
+                i++;
+            }
+            //if the platform is empty then we are using the same platform againg for the next train
+            else if(arr[i]>dep[j]){
+                no_of_platform--;
+                j++;
+            }
+            
+            //filtering the maximum no of platform that used
+            if(result<no_of_platform){
+                result = no_of_platform;
+            }
+            
+        }
+        
+        return result;
+    }
+    
+}
+
+
