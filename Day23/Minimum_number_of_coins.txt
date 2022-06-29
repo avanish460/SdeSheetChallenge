@@ -1,0 +1,25 @@
+Que: Minimum number of Coins(Easy)
+
+Link: https://practice.geeksforgeeks.org/problems/-minimum-number-of-coins4426/1/#
+
+Solution:
+
+class Solution{
+    
+    static List<Integer> minPartition(int N)
+    {
+        // code here
+        int indCurr[] = {1,2,5,10,20,50,100,200,500,2000};
+        int n = indCurr.length;
+        List<Integer> ans = new ArrayList<>();
+        for(int i=n-1; i>=0; i--){
+            while(N >= indCurr[i]){
+                N -= indCurr[i];
+                ans.add(indCurr[i]);
+            }
+        }
+        
+        return ans;
+        
+    }
+}
