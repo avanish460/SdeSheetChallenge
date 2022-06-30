@@ -1,0 +1,28 @@
+Que: Subset Sums(Easy)
+
+Link: https://practice.geeksforgeeks.org/problems/subset-sums2234/1#
+
+Solution:
+
+class Solution{
+    ArrayList<Integer> subsetSums(ArrayList<Integer> arr, int N){
+        // code here
+        ArrayList<Integer> sumSubset = new ArrayList<>();
+         helper(arr, N, 0, 0, sumSubset);
+         
+         return sumSubset;
+    }
+    
+     void helper(ArrayList<Integer> arr, int N, int i, int sum, ArrayList<Integer> sumSubset){
+        if(i == N){
+            sumSubset.add(sum);
+            return;
+        }
+        
+        //when we are picking the element
+        helper(arr, N, i+1, sum+arr.get(i), sumSubset);
+        
+        //when we are not picking the element
+        helper(arr, N, i+1, sum, sumSubset);
+    }
+}
