@@ -1,0 +1,56 @@
+Que: Combination Sum(Medium)
+
+Link: https://leetcode.com/problems/combination-sum/
+
+Solution:
+
+class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        
+        List<List<Integer>> finalResult = new ArrayList<>();
+        //function calling
+        uniqueCandidates(candidates, 0, target, new ArrayList<Integer>(), finalResult);
+        return finalResult;
+    }
+    
+    //Recursion function
+    void uniqueCandidates(int[] candidates, int positionIndex, int remainTarget, ArrayList<Integer> intermediateResult, List<List<Integer>> finalResult){
+        
+        /*
+        There are two base cases:
+        1. when ramainTarget become 0.
+        2. when the positionIndex become greater or equal to the cadidates length
+        */
+        
+        if(remainTarget == 0){
+            finalResult.add(new ArrayList<Integer>(intermediateResult));
+            return;
+        }
+        
+        if(positionIndex >= candidates.length){
+            return;
+        }
+        
+        
+       /* 
+       We have two choice:
+        1. we can add the current candidate in our intermediateResult, if that is              less of equal to target value continuously.
+        2. don't choose that element jump to the next candidate.
+        */
+        
+        
+        // 1 choice:
+        if(candidates[positionIndex] <= remainTarget){
+            intermediateResult.add(candidates[positionIndex]);
+            //recursion
+            uniqueCandidates(candidates, positionIndex, remainTarget-candidates[positionIndex], intermediateResult, finalResult);
+            /*
+            when the remainTarget went down to the negative for the current                   positionIndex candidate then we have to remove the last add element               to our intermediateReuslt. 
+            */
+            intermediateResult.remove(intermediateResult.size()-1);
+        }
+        
+        // 2 choice:
+        uniqueCandidates(candidates, positionIndex + 1, remainTarget, intermediateResult, finalResult);
+    }
+}
