@@ -1,0 +1,56 @@
+Que: Combination Sum II
+
+Link: https://leetcode.com/problems/combination-sum-ii/
+
+Solution:
+
+class Solution {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        
+    List<List<Integer>> finalResult = new ArrayList<>();
+        Arrays.sort(candidates);
+        //function calling
+        uniqueCandidates(candidates, 0, target, new ArrayList<Integer>(), finalResult);
+        return finalResult;
+    }
+    
+    //Recursion function
+    void uniqueCandidates(int[] candidates, int positionIndex, int remainTarget, ArrayList<Integer> intermediateResult, List<List<Integer>> finalResult){
+        
+        /*
+         when the positionIndex become greater or equal to the cadidates length
+        */
+        
+        if(remainTarget == 0){
+            finalResult.add(new ArrayList<Integer>(intermediateResult));
+            return;
+        }
+        
+        
+       /* 
+       We have two choice:
+        1. we can add the current candidate in our intermediateResult, if that is              less of equal to target value continuously.
+        2. don't choose that element jump to the next candidate.
+        */
+        
+        for(int i=positionIndex; i<candidates.length; i++){
+            
+        if(i > positionIndex && candidates[i] == candidates[i-1]){
+            continue;
+        }
+        // 1 choice:
+        if(candidates[i] > remainTarget){
+            break;
+        }
+            intermediateResult.add(candidates[i]);
+            //recursion
+            uniqueCandidates(candidates, i + 1, remainTarget-candidates[i], intermediateResult, finalResult);
+            /*
+            when the remainTarget went down to the negative for the current                   positionIndex candidate then we have to remove the last add element               to our intermediateReuslt. 
+            */
+            intermediateResult.remove(intermediateResult.size()-1);
+        }
+        
+        
+    }
+}
