@@ -1,0 +1,38 @@
+Que: Permutations(Medium)
+
+Link: https://leetcode.com/problems/permutations/
+
+Solution:
+
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        
+        List<List<Integer>> ans = new ArrayList<List<Integer>>();
+        result(0, nums, ans);
+        return ans;
+    }
+    
+    void result(int ind, int[] nums, List<List<Integer>> ans){
+        if(ind == nums.length){
+            ArrayList<Integer> lis = new ArrayList<Integer>();
+            for(int i=0; i<nums.length; i++){
+                lis.add(nums[i]);
+            }
+            ans.add(new ArrayList<Integer>(lis));
+            return;
+        }
+        
+        for(int i=ind; i<nums.length; i++){
+            swap(ind, i, nums);
+            result(ind+1, nums, ans);
+            swap(ind, i, nums);
+        }
+        
+    }
+    
+    void swap(int i, int j, int[] nums){
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+}
