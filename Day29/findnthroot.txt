@@ -1,0 +1,45 @@
+Que: FindNthRoot(medium)
+
+Link: https://practice.geeksforgeeks.org/problems/find-nth-root-of-m5843/1/#
+
+solution:
+
+class Solution
+{
+    public int NthRoot(int n, int m)
+    {
+        // code here
+        long l=1;
+	    long h=m;
+	    
+	    while(l<=h)
+	    {
+	        long mid=(l+h)/2;
+	        long ans = pow(mid,n,m);
+	        if(ans == m){
+	        return (int)mid;
+	        }
+	        else if(ans > m){
+	        h=mid-1;
+	        }
+	        else{
+	        l=mid+1;
+	        }
+	    }
+	    return -1;
+    }
+    
+    public long pow(long mid, int n, int m){
+        
+        long ans = mid;
+        
+        for(int i=1; i<n; i++){
+            ans = ans * mid;
+            if(ans > m){
+                break;
+            }
+            
+        }
+        return ans;
+    }
+}
