@@ -1,0 +1,61 @@
+Que: Implement Queue Using Array
+
+Solution:
+
+package com.company;
+
+ class queueUsingArray{
+    int front=0;
+    int rear=-1;
+    int[] arr;
+    public queueUsingArray(int n){
+        arr = new int[n];
+    }
+    void add(int val){
+        rear++;
+        arr[rear] = val;
+    }
+    int remove(){
+        if(front == rear){
+            int b = arr[front];
+            rear--;
+            return b;
+        }
+        int a = arr[front];
+        front++;
+        int i = 0;
+        while(front != rear){
+            arr[i] = arr[front];
+            front++;
+            i++;
+        }
+        arr[i] = arr[front];
+        front = 0;
+        rear = i;
+        return a;
+    }
+    void display(){
+        for(int i=front; i<=rear; i++){
+            System.out.println(arr[i]);
+        }
+    }
+    int size(){
+        return rear+1;
+    }
+}
+public class Queue {
+    public static void main(String[] args) {
+        queueUsingArray qu = new queueUsingArray(5);
+        qu.add(1);
+        qu.add(2);
+        qu.add(3);
+//        qu.display();
+        System.out.println(qu.remove());
+        System.out.println(qu.remove());
+//        qu.display();
+
+//        System.out.println(qu.size());
+        System.out.println(qu.remove());
+        qu.display();
+    }
+}

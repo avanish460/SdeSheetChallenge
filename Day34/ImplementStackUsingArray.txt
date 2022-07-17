@@ -1,0 +1,42 @@
+Que: Implement stack using Array
+
+Solution:
+
+public class stackUsingArray {
+
+     int i=-1;
+     int stackArr[];
+    public stackUsingArray(int n){
+         stackArr = new int[n];
+    }
+
+    void push(int val){
+        i++;
+        stackArr[i] = val;
+
+    }
+
+    int peek(){
+        return stackArr[i];
+    }
+
+    int pop(){
+        int a = stackArr[i];
+        i--;
+        return a;
+    }
+}
+
+public class Stack {
+    public static void main(String[] args) {
+        stackUsingArray st = new stackUsingArray(5);
+        st.push(1);
+        st.push(2);
+        st.push(3);
+        st.pop();
+        st.push(4);
+        st.pop();
+        int element = st.peek();
+        System.out.println(element);
+    }
+}
