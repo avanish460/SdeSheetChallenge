@@ -1,0 +1,43 @@
+Que: Implement Stack using Queue(Easy)
+
+Link: https://leetcode.com/problems/implement-stack-using-queues/
+
+Solution:
+
+class MyStack {
+
+    Queue<Integer> Q;
+    public MyStack() {
+        Q = new LinkedList<Integer>();
+    }
+    
+    public void push(int x) {
+        Q.add(x);
+        for(int i=1;  i<Q.size(); i++){
+            Q.add(Q.poll());
+            
+        }
+    }
+    
+    public int pop() {
+
+        return Q.poll();
+    }
+    
+    public int top() {
+        return Q.peek();
+    }
+    
+    public boolean empty() {
+        return Q.isEmpty();
+    }
+}
+
+/**
+ * Your MyStack object will be instantiated and called as such:
+ * MyStack obj = new MyStack();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.top();
+ * boolean param_4 = obj.empty();
+ */
